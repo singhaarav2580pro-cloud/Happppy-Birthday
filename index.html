@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Surprise 💌✨</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Playfair Display & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            sans: ['Outfit', 'sans-serif'],
+          },
+          colors: {
+            blush: '#ff85b3',
+            lavender: '#b794f4',
+            peach: '#ffb088',
+            cream: '#fff9fc',
+          },
+          animation: {
+            'float-gentle': 'floatGentle 4.5s ease-in-out infinite',
+            'float-alt': 'floatAlt 5.8s ease-in-out infinite',
+            'card-enter': 'cardEnter 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards',
+            'pulse-glow': 'pulseGlow 2.4s ease-in-out infinite',
+            'flicker': 'flicker 0.75s infinite alternate',
+            'dizzy': 'dizzy 0.45s ease-in-out',
+            'smoke-rise': 'smokeRise 1.6s ease-out forwards',
+          },
+          keyframes: {
+            floatGentle: {
+              '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+              '50%': { transform: 'translateY(-10px) rotate(2deg)' },
+            },
+            floatAlt: {
+              '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+              '50%': { transform: 'translateY(-14px) rotate(-3deg)' },
+            },
+            cardEnter: {
+              '0%': { opacity: '0', transform: 'scale(0.92) translateY(20px)' },
+              '100%': { opacity: '1', transform: 'scale(1) translateY(0)' },
+            },
+            pulseGlow: {
+              '0%, 100%': { boxShadow: '0 10px 28px -6px rgba(244, 63, 94, 0.45), 0 0 0 0 rgba(244, 63, 94, 0.35)' },
+              '50%': { boxShadow: '0 14px 34px -4px rgba(244, 63, 94, 0.6), 0 0 0 8px rgba(244, 63, 94, 0)' },
+            },
+            flicker: {
+              '0%': { transform: 'scale(1) rotate(-3deg)', opacity: '0.92' },
+              '100%': { transform: 'scale(1.14) rotate(3deg)', opacity: '1' },
+            },
+            dizzy: {
+              '0%, 100%': { transform: 'rotate(0deg)' },
+              '25%': { transform: 'rotate(-5deg)' },
+              '75%': { transform: 'rotate(5deg)' },
+            },
+            smokeRise: {
+              '0%': { opacity: '0.85', transform: 'translateY(0) scale(0.8)' },
+              '100%': { opacity: '0', transform: 'translateY(-18px) scale(1.6)' },
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* Dreamy Multi-Stop Pastel Mesh Background */
+    body {
+      background-color: #fff5f9;
+      background-image:
+        radial-gradient(at 12% 15%, rgba(255, 182, 213, 0.55) 0px, transparent 52%),
+        radial-gradient(at 88% 12%, rgba(216, 180, 254, 0.52) 0px, transparent 50%),
+        radial-gradient(at 85% 88%, rgba(254, 215, 170, 0.55) 0px, transparent 52%),
+        radial-gradient(at 15% 85%, rgba(251, 207, 232, 0.5) 0px, transparent 50%);
+      color: #2f1e36;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Premium Frosted Glass Card */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.86);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1.5px solid rgba(255, 255, 255, 0.96);
+      box-shadow:
+        0 24px 50px -12px rgba(219, 39, 119, 0.14),
+        0 10px 24px -8px rgba(139, 92, 246, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+      border-radius: 2rem;
+    }
+
+    /* Interactive Sealed Envelope Styling */
+    .envelope-shell {
+      position: relative;
+      background: linear-gradient(160deg, #fff0f6 0%, #f3e8ff 100%);
+      border: 2px solid #fbcfe8;
+      border-radius: 1.5rem;
+      box-shadow: 0 16px 35px -10px rgba(236, 72, 153, 0.22);
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .envelope-shell:hover {
+      transform: translateY(-4px) scale(1.015);
+    }
+
+    /* Envelope Top Flap SVG */
+    .envelope-flap {
+      transform-origin: top center;
+      transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .envelope-open .envelope-flap {
+      transform: rotateX(180deg);
+    }
+
+    /* Spring Physics Transition for Dodging Gift Buttons */
+    .dodge-gift-btn {
+      position: absolute;
+      left: 0;
+      top: 0;
+      transition:
+        left 0.26s cubic-bezier(0.34, 1.56, 0.64, 1),
+        top 0.26s cubic-bezier(0.34, 1.56, 0.64, 1),
+        transform 0.25s ease;
+      touch-action: none;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    /* Floating Background Sparkles & Petals */
+    .ambient-floater {
+      position: fixed;
+      pointer-events: none;
+      user-select: none;
+      z-index: 1;
+    }
+
+    /* Rising Celebration Balloon */
+    @keyframes balloonRise {
+      0% {
+        transform: translateY(110vh) rotate(-6deg);
+        opacity: 0;
+      }
+      15% {
+        opacity: 0.95;
+      }
+      85% {
+        opacity: 0.95;
+      }
+      100% {
+        transform: translateY(-25vh) rotate(8deg);
+        opacity: 0;
+      }
+    }
+    .rising-balloon {
+      position: fixed;
+      bottom: -80px;
+      pointer-events: none;
+      z-index: 35;
+      animation: balloonRise linear forwards;
+    }
+  </style>
+</head>
+<body class="font-sans relative flex flex-col items-center justify-between min-h-screen px-4 py-5 sm:py-8 selection:bg-pink-200 selection:text-pink-950">
+
+  <!-- Full-Screen Celebration Confetti Canvas -->
+  <canvas id="confettiCanvas" class="fixed inset-0 w-full h-full pointer-events-none z-40"></canvas>
+
+  <!-- Balloon Container -->
+  <div id="balloonContainer" class="fixed inset-0 pointer-events-none overflow-hidden z-30" aria-hidden="true"></div>
+
+  <!-- Ambient Floating Pastel Sparkles & Petals -->
+  <div class="fixed inset-0 pointer-events-none overflow-hidden z-0" aria-hidden="true">
+    <span class="ambient-floater top-[7%] left-[6%] text-2xl sm:text-3xl opacity-70 animate-float-gentle">🌸</span>
+    <span class="ambient-floater top-[12%] right-[8%] text-xl sm:text-2xl opacity-75 animate-float-alt">✨</span>
+    <span class="ambient-floater top-[46%] left-[4%] text-xl opacity-60 animate-float-alt hidden sm:inline">🌷</span>
+    <span class="ambient-floater top-[42%] right-[5%] text-xl opacity-60 animate-float-gentle hidden sm:inline">💫</span>
+    <span class="ambient-floater bottom-[14%] left-[7%] text-2xl sm:text-3xl opacity-70 animate-float-alt">🎀</span>
+    <span class="ambient-floater bottom-[10%] right-[7%] text-2xl sm:text-3xl opacity-70 animate-float-gentle">💖</span>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- TOP CUSTOMIZABLE NAME PILL                                -->
+  <!-- ========================================================= -->
+  <header class="relative z-20 w-full max-w-md flex items-center justify-center mb-4">
+    <button
+      id="openNameModalBtn"
+      type="button"
+      class="group inline-flex items-center gap-2 bg-white/85 hover:bg-white active:scale-95 backdrop-blur-md border border-pink-200/90 shadow-sm hover:shadow-md px-4 py-2 rounded-full text-xs sm:text-sm font-semibold text-purple-900 transition cursor-pointer"
+      aria-label="Customize Birthday Girl Name"
+    >
+      <span>✨ For:</span>
+      <span id="headerGirlName" class="text-pink-600 font-bold underline decoration-pink-300 decoration-2 underline-offset-2">Birthday Girl</span>
+      <span class="text-xs opacity-75 group-hover:rotate-12 transition-transform">✏️</span>
+    </button>
+  </header>
+
+  <!-- Name Editor Modal -->
+  <div id="nameEditorModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-purple-950/35 backdrop-blur-sm px-4">
+    <div class="glass-card w-full max-w-sm p-6 text-center animate-card-enter">
+      <div class="w-12 h-12 rounded-full bg-pink-100 text-2xl flex items-center justify-center mx-auto mb-3">
+        🎀
+      </div>
+      <h3 class="font-serif text-2xl font-bold text-pink-600 mb-1">Personalize Her Card</h3>
+      <p class="text-xs text-gray-500 mb-4">Enter her name below so every wish &amp; receipt is made just for her:</p>
+      <input
+        id="girlNameInput"
+        type="text"
+        maxlength="24"
+        placeholder="e.g., Ananya, Sara, Diya..."
+        class="w-full px-4 py-3 rounded-2xl bg-pink-50/70 border border-pink-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 focus:outline-none text-center text-gray-800 font-semibold text-sm mb-4"
+      />
+      <div class="flex gap-2.5">
+        <button
+          id="cancelNameBtn"
+          type="button"
+          class="flex-1 py-2.5 rounded-xl bg-gray-100 hover:bg-gray-200 text-xs font-bold text-gray-600 transition cursor-pointer"
+        >
+          Cancel
+        </button>
+        <button
+          id="saveNameBtn"
+          type="button"
+          class="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-pink-500 to-purple-500 hover:opacity-95 text-xs font-bold text-white shadow-md shadow-pink-200 transition cursor-pointer"
+        >
+          Save Name 💖
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- MAIN INTERACTIVE STAGE                                    -->
+  <!-- ========================================================= -->
+  <main class="relative z-20 w-full max-w-md mx-auto my-auto">
+
+    <!-- ========================================================= -->
+    <!-- STEP 1: INTERACTIVE SEALED ENVELOPE POP-UP                -->
+    <!-- ========================================================= -->
+    <section id="step1Section" class="glass-card p-6 sm:p-8 text-center animate-card-enter">
+      <span class="inline-block px-3.5 py-1 rounded-full bg-pink-100/90 text-pink-600 text-xs font-bold tracking-wide mb-3">
+        Special Delivery 🕊️
+      </span>
+
+      <h1 class="font-serif text-3xl sm:text-4xl font-bold text-gray-900 mb-2 leading-tight">
+        Hey <span class="girl-name-display text-pink-600">Birthday Girl</span>! 🌸
+      </h1>
+
+      <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-6">
+        Someone sent a little birthday surprise just for you...
+      </p>
+
+      <!-- Interactive Sealed Pastel Envelope -->
+      <div
+        id="envelopeTrigger"
+        role="button"
+        tabindex="0"
+        aria-label="Tap to open your birthday envelope"
+        class="envelope-shell p-5 sm:p-6 mb-5 cursor-pointer select-none animate-float-gentle"
+      >
+        <!-- Decorative Top Envelope Flap SVG -->
+        <svg viewBox="0 0 320 95" class="envelope-flap w-full h-16 sm:h-20 -mt-5 mb-1 drop-shadow-sm" preserveAspectRatio="none">
+          <path d="M0,0 L160,82 L320,0 Z" fill="#fce7f3" stroke="#f9a8d4" stroke-width="2" />
+        </svg>
+
+        <!-- Wax Seal Button -->
+        <div class="relative -mt-9 mb-3 flex justify-center">
+          <div class="w-16 h-16 rounded-full bg-gradient-to-br from-rose-400 via-pink-500 to-purple-500 border-4 border-white shadow-lg flex items-center justify-center text-2xl text-white transform transition group-hover:scale-110">
+            💌
+          </div>
+        </div>
+
+        <p class="font-serif text-lg font-bold text-purple-900 mb-0.5">
+          For <span class="girl-name-display text-pink-600">Birthday Girl</span>
+        </p>
+        <p class="text-xs font-semibold text-pink-500">
+          Tap to Open 💌
+        </p>
+      </div>
+
+      <button
+        id="openEnvelopeBtn"
+        type="button"
+        class="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-pink-500 via-rose-500 to-purple-500 hover:opacity-95 active:scale-95 text-white font-bold text-sm sm:text-base shadow-lg shadow-pink-300/60 transition cursor-pointer"
+      >
+        Open My Surprise ✨
+      </button>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- STEP 2: FUNNY DODGING GIFT SELECTOR (ZERO-FAIL ARENA)     -->
+    <!-- ========================================================= -->
+    <section id="step2Section" class="glass-card p-5 sm:p-7 text-center hidden">
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-100 text-purple-700 text-xs font-bold mb-2">
+        <span>🎁</span>
+        <span>Birthday Gift Vault</span>
+      </div>
+
+      <h2 class="font-serif text-2xl sm:text-3xl font-bold text-gray-900 mb-1">
+        Pick Your Birthday Gift! 🎁
+      </h2>
+      <p class="text-xs sm:text-sm text-gray-500 mb-3">
+        Choose wisely... you only get <span class="font-bold text-pink-600">ONE</span>!
+      </p>
+
+      <!-- Witty Speech Bubble Toast -->
+      <div class="min-h-[36px] flex items-center justify-center mb-2">
+        <div
+          id="speechBubbleToast"
+          class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-amber-100 border border-amber-300 text-amber-900 text-xs font-semibold shadow-sm transition-all duration-200 opacity-0 scale-95"
+        >
+          <span>Nice try! Out of budget 😂</span>
+        </div>
+      </div>
+
+      <!-- UPPER BOUNDED PLAYGROUND ARENA FOR DODGING BUTTONS (ZERO OVERLAP WITH GIFT 3) -->
+      <div
+        id="dodgeArena"
+        class="relative w-full h-[185px] sm:h-[195px] rounded-2xl bg-gradient-to-b from-pink-50/70 to-purple-50/70 border border-dashed border-pink-200 mb-3.5 overflow-hidden"
+      >
+        <!-- OPTION 1: MOST EXPENSIVE (DODGES!) -->
+        <button
+          id="expensiveBtn1"
+          type="button"
+          class="dodge-gift-btn w-[88%] sm:w-[86%] py-3 px-3.5 rounded-2xl bg-gradient-to-r from-amber-100 via-yellow-50 to-amber-100 border-2 border-amber-300 text-gray-800 font-semibold text-xs sm:text-sm shadow-md flex items-center justify-between gap-2 cursor-pointer"
+        >
+          <span class="text-left leading-snug">iPhone 17 Pro Max + Paris Trip ✈️📱</span>
+          <span class="shrink-0 text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-200 text-amber-900">VIP</span>
+        </button>
+
+        <!-- OPTION 2: SECOND EXPENSIVE (DODGES!) -->
+        <button
+          id="expensiveBtn2"
+          type="button"
+          class="dodge-gift-btn w-[88%] sm:w-[86%] py-3 px-3.5 rounded-2xl bg-gradient-to-r from-purple-100 via-indigo-50 to-purple-100 border-2 border-purple-300 text-gray-800 font-semibold text-xs sm:text-sm shadow-md flex items-center justify-between gap-2 cursor-pointer"
+        >
+          <span class="text-left leading-snug">Diamond Necklace &amp; Shopping Spree 💎🛍️</span>
+          <span class="shrink-0 text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-200 text-purple-900">Luxury</span>
+        </button>
+      </div>
+
+      <!-- OPTION 3: SWEET & 100% CLICKABLE (SAFE DEDICATED ZONE BELOW ARENA) -->
+      <button
+        id="sweetGiftBtn"
+        type="button"
+        class="w-full py-4 px-4 rounded-2xl bg-gradient-to-r from-pink-500 via-rose-500 to-pink-600 hover:from-pink-600 hover:to-rose-600 active:scale-95 text-white font-bold text-xs sm:text-sm animate-pulse-glow flex items-center justify-between gap-2 transition cursor-pointer"
+      >
+        <span class="text-left leading-snug">1 Dairy Milk Chocolate + Unlimited Best Wishes 🍫✨</span>
+        <span class="shrink-0 text-[11px] font-bold px-2.5 py-1 rounded-full bg-white/25 text-white">Tap Me 💖</span>
+      </button>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- STEP 3: GRAND BIRTHDAY WISH & INTERACTIVE CAKE            -->
+    <!-- ========================================================= -->
+    <section id="step3Section" class="glass-card p-5 sm:p-7 text-center hidden">
+      <div class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-pink-100 text-pink-600 text-xs font-bold mb-2">
+        <span>🎂</span>
+        <span>Happy Birthday Celebration</span>
+        <span>🎉</span>
+      </div>
+
+      <h2 class="font-serif text-3xl sm:text-4xl font-bold text-gray-900 mb-3 leading-tight">
+        Happy Birthday, <span class="girl-name-display text-pink-600">Birthday Girl</span>! 💖
+      </h2>
+
+      <!-- Heartfelt Simple Everyday Wish Card -->
+      <div class="bg-gradient-to-br from-pink-50/90 via-white to-purple-50/90 border border-pink-200/80 rounded-2xl p-4 sm:p-5 text-left space-y-2.5 mb-4 shadow-sm">
+        <p class="text-xs sm:text-sm text-gray-700 leading-relaxed">
+          Wishing you a day filled with warm smiles, sweet surprises, and endless laughter! 🌸
+        </p>
+        <p class="text-xs sm:text-sm text-gray-700 leading-relaxed">
+          You make every moment brighter just by being you. May this new year bring you good health, peace, success, and all the happiness your heart deserves! ✨
+        </p>
+      </div>
+
+      <!-- Funny Official Gift Receipt -->
+      <div class="bg-white/95 border-2 border-dashed border-purple-200 rounded-2xl p-3.5 mb-4 text-left text-xs text-gray-600 shadow-sm">
+        <div class="flex items-center justify-between border-b border-gray-100 pb-1.5 mb-2">
+          <span class="font-bold text-purple-800 uppercase tracking-wider">🧾 Official Gift Receipt</span>
+          <span class="text-[11px] text-gray-400">For: <strong class="girl-name-display text-pink-600">Birthday Girl</strong></span>
+        </div>
+
+        <div class="space-y-1.5">
+          <div class="flex justify-between items-start gap-2">
+            <span class="text-gray-500">Approved Item:</span>
+            <span class="font-semibold text-gray-800 text-right">1x Dairy Milk Chocolate + Unlimited Smiles 🍫</span>
+          </div>
+          <div class="flex justify-between items-start gap-2">
+            <span class="text-gray-500">Rejected Items:</span>
+            <span class="text-gray-400 line-through text-right">iPhone 17 Pro Max (₹0 budget), Diamond Necklace (Out of stock)</span>
+          </div>
+          <div class="flex justify-between items-center pt-1.5 mt-1 border-t border-gray-100 font-bold text-pink-600">
+            <span>Total Cost:</span>
+            <span>Paid with 100% Pure Friendship ❤️</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive Layered Birthday Cake -->
+      <div class="bg-gradient-to-b from-purple-50/80 to-pink-50/80 border border-pink-100 rounded-2xl p-4 mb-3">
+        <!-- Wish Sent Badge (Revealed when candles blown) -->
+        <div id="wishBadge" class="hidden mb-2">
+          <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-amber-100 border border-amber-300 text-amber-800 text-xs font-bold animate-card-enter">
+            Wish Sent to the Universe! 🌟
+          </span>
+        </div>
+
+        <!-- Cute SVG Layered Birthday Cake -->
+        <div class="flex justify-center mb-2">
+          <svg viewBox="0 0 200 130" class="w-40 h-28 overflow-visible">
+            <!-- Soft Shadow Plate -->
+            <ellipse cx="100" cy="118" rx="78" ry="9" fill="#e9d5ff" />
+            <ellipse cx="100" cy="116" rx="70" ry="6" fill="#ffffff" />
+
+            <!-- Bottom Cake Tier -->
+            <rect x="38" y="78" width="124" height="36" rx="11" fill="#f472b6" />
+            <!-- Decorative Dots on Bottom Tier -->
+            <circle cx="56" cy="100" r="3" fill="#fbcfe8" />
+            <circle cx="78" cy="100" r="3" fill="#fbcfe8" />
+            <circle cx="100" cy="100" r="3" fill="#fbcfe8" />
+            <circle cx="122" cy="100" r="3" fill="#fbcfe8" />
+            <circle cx="144" cy="100" r="3" fill="#fbcfe8" />
+            <!-- Cream Drip Bottom Tier -->
+            <path d="M38 84 Q51 96 63 84 Q75 96 88 84 Q100 96 112 84 Q125 96 137 84 Q150 96 162 84 L162 78 L38 78 Z" fill="#fff1f2" />
+
+            <!-- Top Cake Tier -->
+            <rect x="56" y="50" width="88" height="30" rx="9" fill="#c084fc" />
+            <!-- Cream Drip Top Tier -->
+            <path d="M56 56 Q67 66 78 56 Q89 66 100 56 Q111 66 122 56 Q133 66 144 56 L144 50 L56 50 Z" fill="#ffffff" />
+
+            <!-- 3 Pastel Candles -->
+            <rect x="74" y="28" width="6" height="22" rx="2.5" fill="#fde047" />
+            <rect x="97" y="24" width="6" height="26" rx="2.5" fill="#67e8f9" />
+            <rect x="120" y="28" width="6" height="22" rx="2.5" fill="#fda4af" />
+
+            <!-- Glowing Flickering Candle Flames -->
+            <g id="flamesGroup">
+              <ellipse cx="77" cy="20" rx="4.5" ry="7.5" fill="#fb923c" class="animate-flicker" />
+              <ellipse cx="77" cy="21" rx="2.2" ry="4.5" fill="#fef08a" />
+
+              <ellipse cx="100" cy="16" rx="4.5" ry="7.5" fill="#fb923c" class="animate-flicker" />
+              <ellipse cx="100" cy="17" rx="2.2" ry="4.5" fill="#fef08a" />
+
+              <ellipse cx="123" cy="20" rx="4.5" ry="7.5" fill="#fb923c" class="animate-flicker" />
+              <ellipse cx="123" cy="21" rx="2.2" ry="4.5" fill="#fef08a" />
+            </g>
+
+            <!-- Rising Smoke Puffs (Shown when candles blown out) -->
+            <g id="smokeGroup" class="hidden">
+              <circle cx="77" cy="18" r="3.5" fill="#cbd5e1" class="animate-smoke-rise" />
+              <circle cx="100" cy="14" r="4" fill="#cbd5e1" class="animate-smoke-rise" />
+              <circle cx="123" cy="18" r="3.5" fill="#cbd5e1" class="animate-smoke-rise" />
+            </g>
+          </svg>
+        </div>
+
+        <button
+          id="blowCandlesBtn"
+          type="button"
+          class="w-full py-3 px-5 rounded-xl bg-gradient-to-r from-purple-500 via-pink-500 to-rose-500 hover:opacity-95 active:scale-95 text-white font-bold text-xs sm:text-sm shadow-md shadow-pink-200 transition cursor-pointer"
+        >
+          Make a Wish &amp; Blow Candles 🕯️
+        </button>
+      </div>
+
+      <!-- Replay Surprise Button -->
+      <button
+        id="replayBtn"
+        type="button"
+        class="inline-flex items-center gap-1 text-xs font-semibold text-gray-500 hover:text-pink-600 py-1 px-3 rounded-full transition cursor-pointer"
+      >
+        <span>Replay Surprise 🔄</span>
+      </button>
+    </section>
+
+  </main>
+
+  <!-- Subtle Footer -->
+  <footer class="relative z-20 mt-4 text-center text-[11px] sm:text-xs text-gray-500">
+    Made with 💖 for <span class="girl-name-display font-semibold text-pink-600">Birthday Girl</span>
+  </footer>
+
+  <!-- ========================================================= -->
+  <!-- INTERACTIVE LOGIC (ZERO-FAIL PHYSICS, CONFETTI & STORAGE) -->
+  <!-- ========================================================= -->
+  <script>
+    (function () {
+      const STORAGE_KEY = "bday_surprise_girl_name_v1";
+      let girlName = "Birthday Girl";
+      let candlesBlown = false;
+
+      // Sections
+      const step1Section = document.getElementById("step1Section");
+      const step2Section = document.getElementById("step2Section");
+      const step3Section = document.getElementById("step3Section");
+
+      // Name Modal Elements
+      const openNameModalBtn = document.getElementById("openNameModalBtn");
+      const nameEditorModal = document.getElementById("nameEditorModal");
+      const girlNameInput = document.getElementById("girlNameInput");
+      const saveNameBtn = document.getElementById("saveNameBtn");
+      const cancelNameBtn = document.getElementById("cancelNameBtn");
+      const headerGirlName = document.getElementById("headerGirlName");
+
+      // Step 1 Elements
+      const envelopeTrigger = document.getElementById("envelopeTrigger");
+      const openEnvelopeBtn = document.getElementById("openEnvelopeBtn");
+
+      // Step 2 Elements
+      const dodgeArena = document.getElementById("dodgeArena");
+      const expensiveBtn1 = document.getElementById("expensiveBtn1");
+      const expensiveBtn2 = document.getElementById("expensiveBtn2");
+      const sweetGiftBtn = document.getElementById("sweetGiftBtn");
+      const speechBubbleToast = document.getElementById("speechBubbleToast");
+
+      // Step 3 Elements
+      const blowCandlesBtn = document.getElementById("blowCandlesBtn");
+      const flamesGroup = document.getElementById("flamesGroup");
+      const smokeGroup = document.getElementById("smokeGroup");
+      const wishBadge = document.getElementById("wishBadge");
+      const replayBtn = document.getElementById("replayBtn");
+      const balloonContainer = document.getElementById("balloonContainer");
+
+      // =========================================================
+      // 1. LOCALSTORAGE NAME PERSISTENCE
+      // =========================================================
+      function applyGirlName(rawName) {
+        const clean = (rawName || "").trim() || "Birthday Girl";
+        girlName = clean;
+        headerGirlName.textContent = clean;
+        document.querySelectorAll(".girl-name-display").forEach((el) => {
+          el.textContent = clean;
+        });
+        try {
+          localStorage.setItem(STORAGE_KEY, clean);
+        } catch (err) {
+          // Ignore storage restrictions in private browsing
+        }
+      }
+
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) applyGirlName(saved);
+      } catch (err) {
+        // Fallback to default
+      }
+
+      openNameModalBtn.addEventListener("click", () => {
+        girlNameInput.value = girlName === "Birthday Girl" ? "" : girlName;
+        nameEditorModal.classList.remove("hidden");
+        nameEditorModal.classList.add("flex");
+        setTimeout(() => girlNameInput.focus(), 50);
+      });
+
+      function closeNameModal() {
+        nameEditorModal.classList.add("hidden");
+        nameEditorModal.classList.remove("flex");
+      }
+
+      cancelNameBtn.addEventListener("click", closeNameModal);
+      nameEditorModal.addEventListener("click", (e) => {
+        if (e.target === nameEditorModal) closeNameModal();
+      });
+
+      saveNameBtn.addEventListener("click", () => {
+        applyGirlName(girlNameInput.value);
+        closeNameModal();
+      });
+
+      girlNameInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") saveNameBtn.click();
+      });
+
+      // =========================================================
+      // 2. STEP NAVIGATION HELPER
+      // =========================================================
+      function switchToStep(targetSection) {
+        [step1Section, step2Section, step3Section].forEach((sec) => {
+          sec.classList.add("hidden");
+          sec.classList.remove("animate-card-enter");
+        });
+        targetSection.classList.remove("hidden");
+        void targetSection.offsetWidth;
+        targetSection.classList.add("animate-card-enter");
+      }
+
+      // =========================================================
+      // 3. STEP 1: ENVELOPE OPENING FLOW
+      // =========================================================
+      let openingInProgress = false;
+      function handleOpenEnvelope() {
+        if (openingInProgress) return;
+        openingInProgress = true;
+        envelopeTrigger.classList.add("envelope-open");
+        launchConfetti(45);
+
+        setTimeout(() => {
+          switchToStep(step2Section);
+          positionInitialGiftButtons();
+          openingInProgress = false;
+        }, 420);
+      }
+
+      envelopeTrigger.addEventListener("click", handleOpenEnvelope);
+      envelopeTrigger.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          handleOpenEnvelope();
+        }
+      });
+      openEnvelopeBtn.addEventListener("click", handleOpenEnvelope);
+
+      // =========================================================
+      // 4. STEP 2: ZERO-FAIL DODGING GIFT PHYSICS
+      // =========================================================
+      const messagesBtn1 = [
+        "Nice try! Out of budget 😂",
+        "Error 404: Money not found 💸",
+        "Too heavy to click! 🏋️‍♀️",
+        "My bank account is crying 😭",
+        "Oops, slipped! 🏃💨"
+      ];
+
+      const messagesBtn2 = [
+        "Sold out 0.1 seconds ago! 😅",
+        "Card declined! Try the next one 💳",
+        "Nice reflexes, still no! 😜",
+        "Budget says chocolate only! 🍫",
+        "Way too shiny for my wallet! ✨"
+      ];
+
+      let attempts1 = 0;
+      let attempts2 = 0;
+
+      // Place buttons cleanly in non-overlapping top & bottom lanes inside #dodgeArena
+      function positionInitialGiftButtons() {
+        const arenaW = dodgeArena.clientWidth;
+        const arenaH = dodgeArena.clientHeight;
+        if (!arenaW || !arenaH) return;
+
+        const btn1W = expensiveBtn1.offsetWidth;
+        const btn2W = expensiveBtn2.offsetWidth;
+        const btn1H = expensiveBtn1.offsetHeight;
+        const btn2H = expensiveBtn2.offsetHeight;
+
+        const centerX1 = Math.max(8, (arenaW - btn1W) / 2);
+        const centerX2 = Math.max(8, (arenaW - btn2W) / 2);
+
+        const topLaneY = Math.max(12, Math.floor(arenaH * 0.12));
+        const bottomLaneY = Math.min(arenaH - btn2H - 12, Math.floor(arenaH * 0.56));
+
+        expensiveBtn1.style.left = `${centerX1}px`;
+        expensiveBtn1.style.top = `${topLaneY}px`;
+        expensiveBtn1.style.transform = "scale(1)";
+
+        expensiveBtn2.style.left = `${centerX2}px`;
+        expensiveBtn2.style.top = `${bottomLaneY}px`;
+        expensiveBtn2.style.transform = "scale(1)";
+      }
+
+      // Compute safe bounded coordinates inside its dedicated horizontal lane so buttons NEVER leave the box or overlap each other
+      function moveButtonSafely(btn, isUpperLane) {
+        const arenaW = dodgeArena.clientWidth;
+        const arenaH = dodgeArena.clientHeight;
+        const btnW = btn.offsetWidth;
+        const btnH = btn.offsetHeight;
+
+        const padX = 8;
+        const maxLeft = Math.max(padX, arenaW - btnW - padX);
+        const currentLeft = parseFloat(btn.style.left) || padX;
+
+        // Pick a new X coordinate far enough from current position
+        let nextLeft = padX + Math.random() * (maxLeft - padX);
+        if (Math.abs(nextLeft - currentLeft) < maxLeft * 0.35 && maxLeft > 24) {
+          nextLeft = currentLeft > maxLeft / 2 ? padX + Math.random() * 16 : maxLeft - Math.random() * 16;
+        }
+
+        // Keep Button 1 in upper half and Button 2 in lower half so they never collide
+        const halfH = arenaH / 2;
+        let minY, maxY;
+        if (isUpperLane) {
+          minY = 8;
+          maxY = Math.max(minY, halfH - btnH - 4);
+        } else {
+          minY = halfH + 4;
+          maxY = Math.max(minY, arenaH - btnH - 8);
+        }
+        const nextTop = minY + Math.random() * (maxY - minY);
+
+        btn.style.left = `${Math.round(nextLeft)}px`;
+        btn.style.top = `${Math.round(nextTop)}px`;
+
+        // Update speech bubble toast
+        speechBubbleToast.classList.remove("opacity-0", "scale-95");
+        speechBubbleToast.classList.add("opacity-100", "scale-100");
+
+        if (isUpperLane) {
+          speechBubbleToast.textContent = messagesBtn1[attempts1 % messagesBtn1.length];
+          attempts1++;
+          if (attempts1 >= 4) {
+            btn.style.transform = "scale(0.91)";
+            btn.classList.remove("animate-dizzy");
+            void btn.offsetWidth;
+            btn.classList.add("animate-dizzy");
+          }
+        } else {
+          speechBubbleToast.textContent = messagesBtn2[attempts2 % messagesBtn2.length];
+          attempts2++;
+          if (attempts2 >= 4) {
+            btn.style.transform = "scale(0.91)";
+            btn.classList.remove("animate-dizzy");
+            void btn.offsetWidth;
+            btn.classList.add("animate-dizzy");
+          }
+        }
+      }
+
+      // Bind mouseenter, pointerdown, touchstart & click so it works reliably on desktop and mobile
+      ["mouseenter", "touchstart", "pointerdown", "click"].forEach((evtName) => {
+        expensiveBtn1.addEventListener(
+          evtName,
+          (e) => {
+            if (evtName === "pointerdown" && e.pointerType === "mouse") return;
+            e.preventDefault();
+            e.stopPropagation();
+            moveButtonSafely(expensiveBtn1, true);
+          },
+          { passive: false }
+        );
+
+        expensiveBtn2.addEventListener(
+          evtName,
+          (e) => {
+            if (evtName === "pointerdown" && e.pointerType === "mouse") return;
+            e.preventDefault();
+            e.stopPropagation();
+            moveButtonSafely(expensiveBtn2, false);
+          },
+          { passive: false }
+        );
+      });
+
+      window.addEventListener("resize", () => {
+        if (!step2Section.classList.contains("hidden")) {
+          positionInitialGiftButtons();
+        }
+      });
+
+      // Clicking the Sweet Dairy Milk Chocolate Gift -> Step 3!
+      sweetGiftBtn.addEventListener("click", () => {
+        switchToStep(step3Section);
+        launchConfetti(140);
+        spawnFloatingBalloons();
+      });
+
+      // =========================================================
+      // 5. STEP 3: CANDLES BLOWING & REPLAY
+      // =========================================================
+      blowCandlesBtn.addEventListener("click", () => {
+        if (!candlesBlown) {
+          candlesBlown = true;
+          flamesGroup.classList.add("hidden");
+          smokeGroup.classList.remove("hidden");
+          wishBadge.classList.remove("hidden");
+          blowCandlesBtn.textContent = "Wish Made! Send More Sparkles ✨";
+        }
+        launchConfetti(130);
+        spawnFloatingBalloons();
+      });
+
+      replayBtn.addEventListener("click", () => {
+        // Reset Step 1 Envelope
+        envelopeTrigger.classList.remove("envelope-open");
+
+        // Reset Step 2 Dodging Buttons
+        attempts1 = 0;
+        attempts2 = 0;
+        speechBubbleToast.classList.add("opacity-0", "scale-95");
+        speechBubbleToast.classList.remove("opacity-100", "scale-100");
+
+        // Reset Step 3 Cake
+        candlesBlown = false;
+        flamesGroup.classList.remove("hidden");
+        smokeGroup.classList.add("hidden");
+        wishBadge.classList.add("hidden");
+        blowCandlesBtn.textContent = "Make a Wish & Blow Candles 🕯️";
+
+        switchToStep(step1Section);
+      });
+
+      // =========================================================
+      // 6. FLOATING BALLOONS & PASTEL CONFETTI ENGINE
+      // =========================================================
+      function spawnFloatingBalloons() {
+        const balloonEmojis = ["🎈", "🩷", "💜", "🌸", "✨"];
+        for (let i = 0; i < 8; i++) {
+          const b = document.createElement("div");
+          b.className = "rising-balloon text-3xl sm:text-4xl";
+          b.textContent = balloonEmojis[i % balloonEmojis.length];
+          b.style.left = `${8 + Math.random() * 84}%`;
+          b.style.animationDuration = `${4.2 + Math.random() * 2.4}s`;
+          b.style.animationDelay = `${Math.random() * 0.7}s`;
+          balloonContainer.appendChild(b);
+
+          setTimeout(() => {
+            if (b.parentNode) b.parentNode.removeChild(b);
+          }, 7500);
+        }
+      }
+
+      const canvas = document.getElementById("confettiCanvas");
+      const ctx = canvas.getContext("2d");
+      let particles = [];
+
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      window.addEventListener("resize", resizeCanvas);
+      resizeCanvas();
+
+      const palette = ["#ff85b3", "#c084fc", "#fda4af", "#fde047", "#67e8f9", "#ffb088"];
+
+      function launchConfetti(count = 110) {
+        for (let i = 0; i < count; i++) {
+          particles.push({
+            x: Math.random() * canvas.width,
+            y: -15 - Math.random() * (canvas.height * 0.3),
+            vx: (Math.random() - 0.5) * 4.2,
+            vy: Math.random() * 3.4 + 2,
+            size: Math.random() * 7 + 5,
+            shape: Math.random() > 0.4 ? "rect" : "circle",
+            angle: Math.random() * 360,
+            spin: (Math.random() - 0.5) * 8,
+            color: palette[Math.floor(Math.random() * palette.length)],
+            alpha: 1,
+            fade: 0.0042
+          });
+        }
+      }
+
+      function renderConfetti() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        for (let i = particles.length - 1; i >= 0; i--) {
+          const p = particles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += 0.028;
+          p.angle += p.spin;
+          p.alpha -= p.fade;
+
+          if (p.alpha <= 0 || p.y > canvas.height + 25) {
+            particles.splice(i, 1);
+            continue;
+          }
+
+          ctx.save();
+          ctx.globalAlpha = p.alpha;
+          ctx.translate(p.x, p.y);
+          ctx.rotate((p.angle * Math.PI) / 180);
+          ctx.fillStyle = p.color;
+
+          if (p.shape === "circle") {
+            ctx.beginPath();
+            ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
+            ctx.fill();
+          } else {
+            ctx.fillRect(-p.size / 2, -p.size / 3, p.size, p.size * 0.65);
+          }
+          ctx.restore();
+        }
+
+        requestAnimationFrame(renderConfetti);
+      }
+
+      window.onload = function () {
+        renderConfetti();
+      };
+    })();
+  </script>
+</body>
+</html>
